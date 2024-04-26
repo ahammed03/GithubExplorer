@@ -7,7 +7,8 @@ import { memo } from "react"
 export function GithubCmp() {
     const [showMain, setShowMain] = useState(false)
     return (
-        <div className="space-y-2 ">
+        <div className="space-y-2">
+            <h1 className="text-xl font-bold mb-2 text-center">GitHub Explorer <a href="https://ahammed.vercel.app" className="text-sm font-normal">by ahammed03</a></h1>
             <InputCmp setShowMain={setShowMain}></InputCmp>
             <Suspense fallback={<div>Loading ....</div>}>
                 {showMain ? <MainCmp /> : null}
@@ -24,20 +25,20 @@ function MainCmp() {
     // console.log(userData);
     if (!userData) {
         return (
-            <div className="text-center border-2 rounded-md font-bold p-3">
+            <div className="text-center border-2 border-black rounded-md font-bold p-3">
                 Invalid UserId
             </div>
         )
     } else {
 
         return (
-            <div className="border-2 rounded-md p-2 space-y-1">
+            <div className="border-2 border-black rounded-md p-2 space-y-1">
                 <ProfileCmp {...userData} />
                 <SocialCmp {...userData} />
                 <div className="grid grid-cols-3 items-center p-1 gap-1 text-slate-100">
-                    <button onClick={() => setShowCmp("repo")} className="bg-gray-500 rounded-sm shadow-sm py-0.5" type="button">repos</button>
-                    <button onClick={() => setShowCmp("followers")} className="bg-gray-500 rounded-sm shadow-sm py-0.5" type="button">followers</button>
-                    <button onClick={() => setShowCmp("following")} className="bg-gray-500 rounded-sm shadow-sm py-0.5" type="button">following</button>
+                    <button onClick={() => setShowCmp("repo")} className="bg-black rounded-md shadow-sm py-0.5" type="button">repos</button>
+                    <button onClick={() => setShowCmp("followers")} className="bg-black rounded-md shadow-sm py-0.5" type="button">followers</button>
+                    <button onClick={() => setShowCmp("following")} className="bg-black rounded-md shadow-sm py-0.5" type="button">following</button>
                 </div>
                 <Suspense fallback={<div className="">Loading....</div>}>
                     {/* Need to add loading and make the atoms to atom family */}
@@ -64,7 +65,7 @@ function MainCmp() {
 const ProfileCmp = memo(function ({ avatar_url, name, following, followers, public_repos }) {
 
     return (
-        <div className="border-2 rounded-md p-2 flex justify-between">
+        <div className="border-2 border-black rounded-md p-2 flex justify-between">
             <img className="w-16 h-16 rounded-full" src={avatar_url} alt="" />
             <div className="w-[70%]  text-center">
                 <h2 className="font-bold ">{name}</h2>
@@ -92,7 +93,7 @@ const FollowingCmp = memo(
     function () {
         const followingData = useRecoilValue(followingAtom)
         return (
-            <div className="border-2 rounded-md p-1 space-y-1 text-sm  h-max max-h-[50vh] overflow-auto" >
+            <div className="border-2 border-black rounded-md p-1 space-y-1 text-sm  h-max max-h-[50vh] overflow-auto" >
                 <div className="flex justify-around items-center">
                     <p className="font-bold text-lg">following</p>
                 </div>
@@ -124,7 +125,7 @@ const FollowersCmp = memo(
     function () {
         const followersData = useRecoilValue(followersAtom)
         return (
-            <div className="border-2 rounded-md p-1 space-y-1 text-sm h-max max-h-[50vh] overflow-auto" >
+            <div className="border-2 border-black rounded-md p-1 space-y-1 text-sm h-max max-h-[50vh] overflow-auto" >
                 <div className="flex justify-around items-center">
                     <p className="font-bold text-lg">following</p>
                 </div>
@@ -155,7 +156,7 @@ const SocialCmp = memo(function ({ email, twitter_url, github_url, location }) {
 
 
     return (
-        <div className="border-2 rounded-md p-2 flex justify-around">
+        <div className="border-2 border-black rounded-md p-2 flex justify-around">
 
             <a href={`mailto:${email}`} className={email ? "" : "text-gray-400"}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
@@ -178,7 +179,7 @@ const SocialCmp = memo(function ({ email, twitter_url, github_url, location }) {
 const ReposCmp = memo(function () {
     const reposData = useRecoilValue(reposAtom);
     return (
-        <div className="border-2 rounded-md p-1 space-y-1 text-sm h-max max-h-[50vh] overflow-auto" >
+        <div className="border-2 border-black rounded-md p-1 space-y-1 text-sm h-max max-h-[50vh] overflow-auto" >
             <div className="flex justify-around items-center">
                 <p className="font-bold w-[50%] overflow-auto">Repo Name</p>
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-eye"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" /><circle cx="12" cy="12" r="3" /></svg>
@@ -216,6 +217,13 @@ const ReposCmp = memo(function () {
 const InputCmp = memo(function ({ setShowMain }) {
     const inputRef = useRef()
     const setUsername = useSetRecoilState(usernameAtom)
+
+    const handleKeyPress = useCallback((e) => {
+        if (e.key === 'Enter') {
+            showMainFn();
+        }
+    }, []);
+
     const showMainFn = useCallback(() => {
         const username = inputRef.current.value;
         if (username.length > 1) {
@@ -227,9 +235,9 @@ const InputCmp = memo(function ({ setShowMain }) {
         }
     }, [])
     return (
-        <div className="p-2 border-2 rounded-sm space-x-1 ">
-            <input ref={inputRef} autoFocus className="p-1 outline-none" type="text" placeholder="Enter Github Username" />
-            <button onClick={showMainFn} className="bg-gray-500 rounded-sm shadow-md text-white px-2 py-1" type="button">Search</button>
+        <div className="p-2 border-2  border-black rounded-sm space-x-1 ">
+            <input ref={inputRef} autoFocus className="p-1 outline-none" type="text" placeholder="Enter Github Username"  onKeyPress={handleKeyPress}/>
+            <button onClick={showMainFn} className="bg-black rounded-sm shadow-md text-white px-2 py-1" type="button">Search</button>
         </div>
     )
 
