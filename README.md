@@ -32,11 +32,11 @@ npm run dev
 The application will be running at your localhost example : `http://localhost:3000`
 
 ## Features
--View GitHub user profile information
--See user followers, repositories, and following
--View user's email and location [ only if user linked to his GitHub ]
--View user's social accounts
--Direct links to user's GitHub profile, followers, repositories, and following
+- View GitHub user profile information
+- See user followers, repositories, and following
+- View user's email and location [ only if user linked to his GitHub ]
+- View user's social accounts
+- Direct links to user's GitHub profile, followers, repositories, and following
 
 
 Feel free to customize the README file further with additional details or formatting as needed.
