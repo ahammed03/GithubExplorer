@@ -8,22 +8,26 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/ahammed03/GithubExplorer.git
+```
 
 Navigate into the project directory:
 
 ```bash
 cd GithubExplorer
+```
 
 Install dependencies:
 
 ```bash
 npm install
+```
 
 Usage
 To run the application locally, use the following command:
 
 ```bash
 npm run dev
+```
 
 The application will be running at your localhost example : `http://localhost:3000`
 
@@ -36,3 +40,4 @@ Direct links to user's GitHub profile, followers, repositories, and following
 
 
 Feel free to customize the README file further with additional details or formatting as needed.
+* Email: ahammedshaik0301@gmail.com
